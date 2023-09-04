@@ -5,6 +5,7 @@ import (
 )
 
 type ProductRepository interface {
-	RegisterProduct(product entity.Product) error
+	SaveProduct(product entity.Product) error
 	GetAllProducts() ([]entity.Product, error)
+	DeleteProduct(productId int32) error
 }

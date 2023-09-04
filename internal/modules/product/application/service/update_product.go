@@ -4,8 +4,8 @@ import (
 	"golang-crud-exagonal-arquitecture/internal/modules/product/model/entity"
 )
 
-func (p *product) RegisterProduct(productEntity entity.Product) error {
-	err := entity.ValidateProduct(productEntity)
+func (p *product) UpdateProduct(productEntity entity.Product) error {
+	err := entity.ValidateProductUpdate(productEntity)
 
 	if err != nil {
 		return err

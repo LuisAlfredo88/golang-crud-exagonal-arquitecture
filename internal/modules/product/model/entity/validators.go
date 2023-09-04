@@ -20,3 +20,17 @@ func ValidateProduct(product Product) error {
 
 	return nil
 }
+
+func ValidateProductUpdate(product Product) error {
+	err := ValidateProduct(product)
+
+	if err != nil {
+		return err
+	}
+
+	// if product.ID <= 0 {
+	// 	return errors.New("must specify product id")
+	// }
+
+	return nil
+}

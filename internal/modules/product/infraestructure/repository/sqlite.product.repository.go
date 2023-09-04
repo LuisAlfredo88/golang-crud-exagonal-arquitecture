@@ -17,8 +17,8 @@ func NewLogRepository(db *gorm.DB) productModel.ProductRepository {
 	}
 }
 
-func (r *repo) RegisterProduct(productEntity entity.Product) error {
-	result := r.db.Create(productEntity)
+func (r *repo) SaveProduct(productEntity entity.Product) error {
+	result := r.db.Omit("ID").Create(productEntity)
 	return result.Error
 }
 
@@ -26,4 +26,9 @@ func (r *repo) GetAllProducts() ([]entity.Product, error) {
 	var products []entity.Product
 	r.db.Find(&products)
 	return products, nil
+}
+
+func (r *repo) DeleteProduct(productId int32) error {
+	result := r.db.Delete(&entity.Product{}, productId)
+	return result.Error
 }

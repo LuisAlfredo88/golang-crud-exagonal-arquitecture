@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"strconv"
 
 	"golang-crud-exagonal-arquitecture/internal/modules/product/model/entity"
 	product "golang-crud-exagonal-arquitecture/internal/modules/product/model/service"
@@ -31,6 +32,7 @@ func (l *ProductApi) Register() {
 	logs := l.api.Group("/products")
 	logs.GET("", l.GetAllProducts)
 	logs.POST("", l.saveProduct)
+	logs.DELETE("/:id", l.deleteProduct)
 }
 
 func (p *ProductApi) GetAllProducts(c echo.Context) error {
@@ -43,6 +45,26 @@ func (p *ProductApi) saveProduct(c echo.Context) error {
 	c.Bind(&params)
 
 	err := p.service.RegisterProduct(params)
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, shared.ResponseMessage{
+			Message: err.Error(),
+		})
+	}
+
+	return c.JSON(http.StatusCreated, nil)
+}
+
+func (p *ProductApi) deleteProduct(c echo.Context) error {
+	id, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, shared.ResponseMessage{
+			Message: err.Error(),
+		})
+	}
+
+	p.service.DeleteProduct(int32(id))
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, shared.ResponseMessage{
