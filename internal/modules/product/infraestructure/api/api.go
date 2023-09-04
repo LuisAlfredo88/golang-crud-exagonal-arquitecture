@@ -32,6 +32,7 @@ func (l *ProductApi) Register() {
 	logs := l.api.Group("/products")
 	logs.GET("", l.GetAllProducts)
 	logs.POST("", l.saveProduct)
+	logs.PUT("", l.saveProduct)
 	logs.DELETE("/:id", l.deleteProduct)
 }
 
@@ -44,7 +45,7 @@ func (p *ProductApi) saveProduct(c echo.Context) error {
 	params := entity.Product{}
 	c.Bind(&params)
 
-	err := p.service.RegisterProduct(params)
+	err := p.service.SaveProduct(params)
 
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, shared.ResponseMessage{

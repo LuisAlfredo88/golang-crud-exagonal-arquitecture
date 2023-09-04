@@ -1,7 +1,7 @@
 package sqlite
 
 import (
-	"golang-crud-exagonal-arquitecture/internal/initialize/db/dbentities"
+	"golang-crud-exagonal-arquitecture/internal/modules/product/model/entity"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -14,7 +14,7 @@ func NewSQLite() *gorm.DB {
 		panic("Error connecting to the database")
 	}
 
-	db.AutoMigrate(&dbentities.Product{})
+	db.AutoMigrate(&entity.Product{})
 
 	return db
 }

@@ -18,7 +18,7 @@ func NewLogRepository(db *gorm.DB) productModel.ProductRepository {
 }
 
 func (r *repo) SaveProduct(productEntity entity.Product) error {
-	result := r.db.Omit("ID").Create(productEntity)
+	result := r.db.Where("id = ?", productEntity.ID).Save(&productEntity)
 	return result.Error
 }
 
