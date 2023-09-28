@@ -1,13 +1,13 @@
 package service
 
 import (
-	"golang-crud-exagonal-arquitecture/internal/modules/product/application/service"
+	"golang-crud-exagonal-arquitecture/internal/modules/vehicle/application/service"
 
 	"go.uber.org/fx"
 )
 
 var Module = fx.Options(
 	fx.Provide(
-		service.NewProductService,
+		service.NewVehicleService,
 	),
 )

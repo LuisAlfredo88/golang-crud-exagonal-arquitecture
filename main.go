@@ -18,7 +18,6 @@ func main() {
 		fx.Provide(
 			echo.New,
 			http.NewServeMux,
-			// sqlite.NewSQLite,
 			sqlserver.NewSqlServer,
 			api.NewHTTPServer,
 		),
