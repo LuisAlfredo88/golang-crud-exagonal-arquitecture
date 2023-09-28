@@ -2,7 +2,8 @@ package main
 
 import (
 	"golang-crud-exagonal-arquitecture/internal/initialize/api"
-	"golang-crud-exagonal-arquitecture/internal/initialize/db/sqlite"
+	// "golang-crud-exagonal-arquitecture/internal/initialize/db/sqlite"
+	"golang-crud-exagonal-arquitecture/internal/initialize/db/sqlserver"
 	"golang-crud-exagonal-arquitecture/internal/initialize/repository"
 	"golang-crud-exagonal-arquitecture/internal/initialize/service"
 	"net/http"
@@ -17,7 +18,8 @@ func main() {
 		fx.Provide(
 			echo.New,
 			http.NewServeMux,
-			sqlite.NewSQLite,
+			// sqlite.NewSQLite,
+			sqlserver.NewSqlServer,
 			api.NewHTTPServer,
 		),
 		repository.Module,
