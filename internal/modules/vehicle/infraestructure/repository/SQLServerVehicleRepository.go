@@ -17,15 +17,15 @@ func NewVehicleRepository(db *gorm.DB) vehicleModel.VehicleRepository {
 	}
 }
 
-func (r *repo) SaveVehicle(productEntity entity.Vehicle) error {
-	result := r.db.Where("id = ?", productEntity.ID).Save(&productEntity)
+func (r *repo) SaveVehicle(vehicleEntity entity.Vehicle) error {
+	result := r.db.Where("id = ?", vehicleEntity.ID).Save(&vehicleEntity)
 	return result.Error
 }
 
 func (r *repo) GetAllVehicles() ([]entity.Vehicle, error) {
-	var products []entity.Vehicle
-	r.db.Find(&products)
-	return products, nil
+	var vehciles []entity.Vehicle
+	r.db.Find(&vehciles)
+	return vehciles, nil
 }
 
 func (r *repo) GetVehicle(vehicleId int32) (entity.Vehicle, error) {
@@ -34,7 +34,7 @@ func (r *repo) GetVehicle(vehicleId int32) (entity.Vehicle, error) {
 	return vehicle, nil
 }
 
-func (r *repo) DeleteVehicle(productId int32) error {
-	result := r.db.Delete(&entity.Vehicle{}, productId)
+func (r *repo) DeleteVehicle(vehcileId int32) error {
+	result := r.db.Delete(&entity.Vehicle{}, vehcileId)
 	return result.Error
 }

@@ -6,6 +6,6 @@ type VehicleModel struct {
 	gorm.Model
 	ID     uint   `gorm:"primaryKey;autoIncrement"`
 	Name   string `json:"name"`
-	MarkID uint
+	MarkID uint   `json:"mark_id"`
 	Mark   Mark
 }

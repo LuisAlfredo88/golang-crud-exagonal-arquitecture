@@ -1,7 +1,7 @@
 package api
 
 import (
-	vehcile "golang-crud-exagonal-arquitecture/internal/modules/vehicle/infraestructure/api"
+	vehicle "golang-crud-exagonal-arquitecture/internal/modules/vehicle/infraestructure/api"
 
 	"github.com/labstack/echo/v4"
 	"go.uber.org/fx"
@@ -9,14 +9,14 @@ import (
 
 var Module = fx.Options(
 	fx.Provide(
-		vehcile.NewVehcileApi,
+		vehicle.NewVehicleApi,
 	),
 )
 
 func RegisterRoutes(
 	s *API,
 	e *echo.Echo,
-	vehicleApi *vehcile.VehcileApi,
+	vehicleApi *vehicle.VehicleApi,
 ) {
 	go s.Start(e)
 	vehicleApi.Register()
