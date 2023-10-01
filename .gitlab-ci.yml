@@ -1,0 +1,11 @@
+include:
+  - local: '/ci_items/gitlab-ci-all.yml'
+  - local: '/ci_items/gitlab-ci-dev.yml'
+  # - local: '/ci_items/gitlab-ci-qa.yml'
+  # - local: '/ci_items/gitlab-ci-prod.yml'
+
+variables:
+  CONFIG_PATH: $CONFIG_PATH 
+
+before_script:
+  - source $CONFIG_PATH

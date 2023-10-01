@@ -1,0 +1,59 @@
+build-dev:
+  stage: build
+  script:
+    - docker build --file Dockerfile.test --network=host --no-cache -t rentcar-dev . 
+  artifacts:
+    expire_in: 1h
+  except:
+    - qa
+    - master  
+    
+test-dev:
+  stage: test
+  dependencies:
+    - build-dev       
+  script:
+    - docker run --network=host --env-file=${CONFIG_PATH} -i rentcar-dev go test ./...
+  artifacts:
+    expire_in: 1h
+  except:
+    - qa
+    - master  
+
+# migrate-dev:
+#   stage: db-migration
+#   dependencies:
+#     - test-dev       
+#   script:
+#     - docker run --network=host --env-file=${CONFIG_PATH} -i $DOCKER_IMAGE_NAME python manage.py migrate
+#   artifacts:
+#     expire_in: 1h
+#   tags:
+#     - rentcar-dev 
+#   only:
+#     - develop    
+
+# deploy-dev:
+#   stage: deploy
+#   dependencies:
+#    - test-dev   
+#   script:
+#     - docker-compose build --no-cache
+#     - docker-compose -f docker-compose.yml up -d
+#   environment:
+#     name: develop
+#   tags:
+#     - rentcar-dev 
+#   only:
+#     - develop 
+
+# clean-dev:
+#   stage: clean
+#   dependencies:
+#    - deploy-dev   
+#   script:
+#     - docker container prune -f && docker image prune -f
+#   tags:
+#     - rentcar-dev 
+#   only:
+#     - develop     

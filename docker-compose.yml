@@ -6,11 +6,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    depends_on:
-      - test
 
   test:
     build:
       context: .
       dockerfile: Dockerfile.test
-    command: go test ./...
+    command: go test ./..

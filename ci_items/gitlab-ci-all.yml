@@ -1,0 +1,13 @@
+stages:
+  - build
+  - test
+  # - db-migration
+  # - deploy
+  # - clean
+
+variables:
+  CONFIG_PATH: $CONFIG_PATH 
+
+
+before_script:
+  - export CONFIG_PATH=$CONFIG_PATH
